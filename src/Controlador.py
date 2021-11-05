@@ -1,10 +1,19 @@
 import json
 
 from datetime import date
+
+import dotenv
+from dotenv import load_dotenv
+
 path_configs = 'utils\\configs.json'
 path_contas = 'utils\\contas.json'
 path_coins = 'utils\\coins.json'
 path_log = 'Logs\\log-{}.txt'
+
+
+def set_key(key, value):
+    dotenv.set_key(dotenv_path=".env", key_to_set=key, value_to_set=value)
+    load_dotenv(override=True)
 
 
 def save_log(new_log):
