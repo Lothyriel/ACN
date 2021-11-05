@@ -1,2 +1,5 @@
+.env file
+
 TOKEN_BOT= discord bot token
 FRASE_METAMASK= metamask seed phrase
+BEARER_TOKEN= let empty
