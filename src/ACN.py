@@ -27,7 +27,7 @@ class ACN(commands.Bot):
 
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
-        self.Controlador = C.Controlador()
+        # self.Controlador = C.Controlador()
         # self.CrowTracker = CrowTracker(self)
         self.Selenium = Navegador(self)
 
