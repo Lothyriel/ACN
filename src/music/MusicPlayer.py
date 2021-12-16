@@ -6,7 +6,7 @@ import random
 import discord
 from discord.ext import commands
 from pytube import Playlist
-from youtube_dl import YoutubeDL as Yt
+from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
 from src.music.Musica import Musica
 
@@ -41,7 +41,7 @@ async def get_busca(pesquisa):
     return Musica(resultado["title"], resultado["link"])
 
 
-async def get_dados_musica(musica):
+async def get_dados_musica(musica: Musica):
     loop = asyncio.get_event_loop()
     try:
         dados = await loop.run_in_executor(None, get_dados, musica.url)
@@ -55,7 +55,7 @@ async def get_dados_musica(musica):
 
 def get_dados(url):
     ydl_opts = {'format': 'bestaudio', 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn -age_limit 90'}
-    with Yt(ydl_opts) as ydl:
+    with YoutubeDL(ydl_opts) as ydl:
         return ydl.extract_info(url=url, download=False)
 
 

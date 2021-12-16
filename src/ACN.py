@@ -27,8 +27,8 @@ class ACN(commands.Bot):
 
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
-        # self.Controlador = C.Controlador()
-        # self.CrowTracker = CrowTracker(self)
+        self.Controlador = C.Controlador()
+        self.CrowTracker = CrowTracker(self)
         self.Selenium = Navegador(self)
 
         player = MusicPlayer(self)
@@ -58,13 +58,9 @@ class ACN(commands.Bot):
     async def on_ready(self):
         print("{0} Estamos dentro".format(self.user))
         status = self.set_status
-        verificacao = self.CrowTracker.roda_verificacao
 
         if not status.is_running():
             status.start()
-
-        if not verificacao.is_running():
-            verificacao.start()
 
     @tasks.loop(seconds=10)
     async def set_status(self):
