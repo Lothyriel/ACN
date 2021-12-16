@@ -27,20 +27,20 @@ class ACN(commands.Bot):
 
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
-        self.Controlador = C.Controlador()
-        self.CrowTracker = CrowTracker(self)
+        # self.Controlador = C.Controlador()
+        # self.CrowTracker = CrowTracker(self)
         self.Selenium = Navegador(self)
 
         player = MusicPlayer(self)
         self.add_cog(player)
         self.add_cog(SoundPad(player))
 
-        self.add_cog(CoinPriceNotifier(self))
+        # self.add_cog(CoinPriceNotifier(self))
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
 
         self.add_cog(self.Selenium)
-        self.add_cog(self.CrowTracker)
+        # self.add_cog(self.CrowTracker)
         load_dotenv()
         self.run(os.getenv("TOKEN_BOT"))
 

@@ -73,7 +73,6 @@ async def loga_metamask(driver):
 class Navegador(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.Controlador = bot.Controlador
 
     @commands.command(help="!cc <usuario> <mentira a ser enviada>")
     @commands.cooldown(1, 10, commands.BucketType.user)
