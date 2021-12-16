@@ -123,7 +123,7 @@ class MusicPlayer(commands.Cog):
             ff_opts = {}
         else:
             await get_dados_musica(musica)
-            ff_opts = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options' : "-vn"}
+            ff_opts = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': "-vn"}
 
         if isinstance(musica.audio, Exception):
             mostra = musica.titulo or musica.url

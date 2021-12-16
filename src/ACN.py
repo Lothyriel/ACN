@@ -52,7 +52,7 @@ class ACN(commands.Bot):
         prefix = "!{}".format(command)
         args = ctx.message.content.replace(prefix, "")
         data = datetime.today().time()
-        C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
+        # C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
 
     @commands.Cog.listener()
     async def on_ready(self):
