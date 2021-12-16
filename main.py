@@ -1,3 +1,4 @@
 from src.ACN import ACN
 
-ACN()
+if __name__ == '__main__':
+  ACN()
