@@ -136,8 +136,7 @@ class MusicPlayer(commands.Cog):
         embed.add_field(name=musica.titulo, value=musica.url, inline=False)
 
         await ctx.send(embed=embed)
-        print(os.getcwd())
-        player = discord.FFmpegPCMAudio(musica.audio, **ff_opts, executable="ffmpeg.exe")
+        player = discord.FFmpegPCMAudio(musica.audio, **ff_opts)
 
         voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(self.tocar_prox(ctx, voice_client), self.bot.loop))
 
