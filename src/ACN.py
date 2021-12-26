@@ -12,9 +12,6 @@ from src import CoinPriceAlert
 from src.Diversos import Diversos
 from src.EnviaHentai import EnviaHentai
 from src.music.MusicPlayer import MusicPlayer
-from src.CoinPriceAlert import CoinPriceNotifier
-import src.Controlador as C
-from src.CrowTracker.CrowTracker import CrowTracker
 from src.Navegador import Navegador
 from src.music.SoundPad import SoundPad
 
@@ -86,8 +83,6 @@ class ACN(commands.Bot):
 
         else:
             msg = "Erro: {}".format(erro)
-            pirocudo = await self.fetch_user(self.id_pirocudo)
-            return await pirocudo.send("{} | {}".format(ctx.author, msg))
 
         await ctx.send("{} | {}".format(ctx.author.mention, msg))
 
