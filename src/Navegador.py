@@ -13,7 +13,7 @@ from src import Controlador
 
 
 def roda_drive(custom_options=webdriver.ChromeOptions()):
-    return webdriver.Chrome(ChromeDriverManager().install(), options=custom_options)
+    return webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM, options=custom_options).install())
 
 
 async def loga_metamask(driver):
