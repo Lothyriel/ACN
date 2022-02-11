@@ -54,7 +54,7 @@ class ACN(commands.Bot):
         prefix = "!{}".format(command)
         args = ctx.message.content.replace(prefix, "")
         data = datetime.today().time()
-        if self.random(0, 100) == 100:
+        if self.random(1, 101) == 100:
             ctx.send("{} Comi teu cuzinho".format(ctx.author.mention))
         # C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
 
