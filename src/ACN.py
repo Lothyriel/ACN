@@ -8,7 +8,7 @@ from datetime import datetime
 import discord.ext.commands as exc
 from dotenv import load_dotenv
 from random import seed
-from random import random
+from random import randint
 import time
 
 from src import CoinPriceAlert
