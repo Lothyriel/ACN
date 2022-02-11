@@ -9,6 +9,7 @@ import discord.ext.commands as exc
 from dotenv import load_dotenv
 from random import seed
 from random import random
+import time
 
 from src import CoinPriceAlert
 from src.Diversos import Diversos
