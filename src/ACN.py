@@ -7,6 +7,8 @@ from datetime import datetime
 
 import discord.ext.commands as exc
 from dotenv import load_dotenv
+from random import seed
+from random import random
 
 from src import CoinPriceAlert
 from src.Diversos import Diversos
@@ -22,6 +24,8 @@ class ACN(commands.Bot):
         intents.members = True
         super().__init__(intents=intents, command_prefix='!', case_insensitive=True)
 
+        seed(time.time())
+        self.random = randint
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
         # self.Controlador = C.Controlador()
@@ -49,6 +53,8 @@ class ACN(commands.Bot):
         prefix = "!{}".format(command)
         args = ctx.message.content.replace(prefix, "")
         data = datetime.today().time()
+        if self.random(0, 100) == 100:
+            ctx.send("{} Comi teu cuzinho".format(ctx.author.mention))
         # C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
 
     @commands.Cog.listener()
@@ -61,7 +67,7 @@ class ACN(commands.Bot):
 
     @tasks.loop(seconds=10)
     async def set_status(self):
-        await self.change_presence(activity=discord.Game(name=await CoinPriceAlert.get_valor_coin("0x339c72829ab7dd45c3c52f965e7abe358dd8761e") + "\n" + await CoinPriceAlert.get_valor_coin("0x31471E0791fCdbE82fbF4C44943255e923F1b794")))
+        await self.change_presence(activity=discord.Game(name=await CoinPriceAlert.get_valor_coin("0xfa57ff4670f9016069e799a51a3186d03991e431")))
         print("Atualizando status")
 
     @commands.Cog.listener()
