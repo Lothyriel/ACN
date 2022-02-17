@@ -57,7 +57,7 @@ class ACN(commands.Bot):
         if self.random(1, 101) == 100:
             await ctx.send("{} Comi teu cuzinho".format(ctx.author.mention))
         # C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
-        await self.delete_message(ctx.message)
+        await ctx.message.delete()
 
     @commands.Cog.listener()
     async def on_ready(self):
