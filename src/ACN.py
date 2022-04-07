@@ -33,9 +33,9 @@ class ACN(commands.Bot):
         # self.CrowTracker = CrowTracker(self)
         self.Selenium = Navegador(self)
 
-        player = MusicPlayer(self)
-        self.add_cog(player)
-        self.add_cog(SoundPad(player))
+        self.player = MusicPlayer(self)
+        self.add_cog(self.player)
+        self.add_cog(SoundPad(self.player))
 
         # self.add_cog(CoinPriceNotifier(self))
         self.add_cog(Diversos(self))
@@ -63,6 +63,7 @@ class ACN(commands.Bot):
     async def on_ready(self):
         print("{0} Estamos dentro".format(self.user))
         status = self.set_status
+        self.player.load()
 
         if not status.is_running():
             status.start()

@@ -62,6 +62,9 @@ def get_dados(url):
 class MusicPlayer(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.fila = {}
+
+    def load(self):
         self.fila = {guild.id: list() for guild in self.bot.guilds}
 
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
