@@ -165,7 +165,7 @@ class MusicPlayer(commands.Cog):
         else:
             for musica in self.fila[ctx.guild.id][:10]:
                 embed.add_field(name=musica.titulo, value=musica.url, inline=False)
-            embed.add_field(name="Musicas na fila:", value=str(len(self.fila)))
+            embed.add_field(name="Musicas na fila:", value=str(len(self.fila[ctx.guild.id])))
         await ctx.send(embed=embed)
 
     @commands.command(help="Para de tocar né...")
