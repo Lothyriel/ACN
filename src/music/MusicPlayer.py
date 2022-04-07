@@ -62,7 +62,7 @@ def get_dados(url):
 class MusicPlayer(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.fila = {guild: list() for guild in self.bot.guilds}
+        self.fila = {guild.id: list() for guild in self.bot.guilds}
 
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
@@ -76,8 +76,8 @@ class MusicPlayer(commands.Cog):
         if not voice_client:
             await user.voice.channel.connect()
 
-        if len(self.fila[ctx.guild]) != 0:
-            random.shuffle(self.fila[ctx.guild])
+        if len(self.fila[ctx.guild.id]) != 0:
+            random.shuffle(self.fila[ctx.guild.id])
 
         await ctx.send("Playlist embaralhada!")
 
@@ -104,20 +104,20 @@ class MusicPlayer(commands.Cog):
 
     async def por_na_fila(self, ctx, prioridade, musica, voice_client):
         if prioridade != 2:
-            self.fila[ctx.guild].insert(0, musica)
+            self.fila[ctx.guild.id].insert(0, musica)
             if prioridade == 0 and voice_client.is_playing():
                 return await self.skip(ctx)
         else:
-            self.fila[ctx.guild].append(musica)
+            self.fila[ctx.guild.id].append(musica)
 
         if not voice_client.is_playing():
             await self.tocar_prox(ctx, voice_client)
 
     async def tocar_prox(self, ctx, voice_client):
-        if len(self.fila[ctx.guild]) == 0:
+        if len(self.fila[ctx.guild.id]) == 0:
             return await ctx.send(embed=discord.Embed(title="Fila Vazia", color=0xFF0000))
 
-        musica = self.fila[ctx.guild].pop(0)
+        musica = self.fila[ctx.guild.id].pop(0)
         if musica.local_file:
             musica.audio = os.getcwd() + "/music/" + musica.url
             ff_opts = {}
@@ -157,10 +157,10 @@ class MusicPlayer(commands.Cog):
     @commands.command(help="Mostra a fila...", name="queue", aliases=["q", "fila"])
     async def mostra_queue(self, ctx):
         embed = discord.Embed(title="Fila:", color=0x0000ff)
-        if len(self.fila[ctx.guild]) == 0:
+        if len(self.fila[ctx.guild.id]) == 0:
             embed.add_field(name="Sem músicas na fila!", value="--------------------", inline=False)
         else:
-            for musica in self.fila[ctx.guild][:10]:
+            for musica in self.fila[ctx.guild.id][:10]:
                 embed.add_field(name=musica.titulo, value=musica.url, inline=False)
             embed.add_field(name="Musicas na fila:", value=str(len(self.fila)))
         await ctx.send(embed=embed)
@@ -178,7 +178,7 @@ class MusicPlayer(commands.Cog):
 
         await ctx.send("{} Parando e limpando a fila".format(user.mention))
         voice_client.stop()
-        self.fila[ctx.guild].clear()
+        self.fila[ctx.guild.id].clear()
 
     @commands.command(help="Para de tocar né...")
     async def pause(self, ctx):
