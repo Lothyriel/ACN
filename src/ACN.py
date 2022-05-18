@@ -68,13 +68,7 @@ class ACN(commands.Bot):
         status = self.set_status
         self.player.load()
 
-        if not status.is_running():
-            status.start()
-
-    @tasks.loop(seconds=10)
-    async def set_status(self):
-        await self.change_presence(activity=discord.Game(name=await CoinPriceAlert.get_valor_coin("0xfa57ff4670f9016069e799a51a3186d03991e431")))
-        print("Atualizando status")
+        await self.change_presence(activity=discord.Game(name="Sexo na lan house"))
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, erro):
