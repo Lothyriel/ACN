@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from random import seed
 from random import randint
 import time
+from EnviaSojado import EnviaSojado
 
 from src import CoinPriceAlert
 from src.Diversos import Diversos
@@ -40,6 +41,8 @@ class ACN(commands.Bot):
         # self.add_cog(CoinPriceNotifier(self))
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
+
+        self.add_cog(EnviaSojado(self))
 
         self.add_cog(self.Selenium)
         # self.add_cog(self.CrowTracker)
