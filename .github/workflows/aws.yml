@@ -38,7 +38,7 @@ env:
   ECS_SERVICE: bot-acn-service                    # set this to your Amazon ECS service name
   ECS_CLUSTER: bot-acn-cluster                    # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: run-task-definition.json   # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: bot-acn                         # set this to the name of the container in the
+  CONTAINER_NAME: bot-acn-repo                    # set this to the name of the container in the
                                                   # containerDefinitions section of your task definition
 
 permissions:
