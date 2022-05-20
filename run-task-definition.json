@@ -1,22 +1,14 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::297926726276:role/ecsTaskExecutionRole",
+  "executionRoleArn": null,
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/first-run-task-definition",
-          "awslogs-region": "sa-east-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-      "entryPoint": [],
+      "logConfiguration": null,
+      "entryPoint": null,
       "portMappings": [],
-      "command": [],
+      "command": null,
       "linuxParameters": null,
       "cpu": 0,
       "environment": [],
@@ -28,10 +20,10 @@
       "secrets": null,
       "dockerSecurityOptions": null,
       "memory": null,
-      "memoryReservation": null,
+      "memoryReservation": 400,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "public.ecr.aws/c3c3u4i1/bot-acn",
+      "image": "297926726276.dkr.ecr.sa-east-1.amazonaws.com/bot-acn-repo:f783c66c0ac30f7213a3fcbf871fc1bed30e2b7d",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -39,7 +31,7 @@
       "interactive": null,
       "healthCheck": null,
       "essential": true,
-      "links": [],
+      "links": null,
       "hostname": null,
       "extraHosts": null,
       "pseudoTerminal": null,
@@ -48,20 +40,41 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "bot-acn"
+      "name": "bot-acn-repo"
     }
   ],
   "placementConstraints": [],
-  "memory": "512",
+  "memory": null,
   "taskRoleArn": null,
-  "family": "first-run-task-definition",
+  "compatibilities": [
+    "EXTERNAL",
+    "EC2"
+  ],
+  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:297926726276:task-definition/bot-acn-task-definition:1",
+  "family": "bot-acn-task-definition",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    }
+  ],
   "pidMode": null,
   "requiresCompatibilities": [
-    "FARGATE"
+    "EC2"
   ],
-  "networkMode": "awsvpc",
+  "networkMode": null,
   "runtimePlatform": null,
-  "cpu": "256",
+  "cpu": null,
+  "revision": 1,
+  "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
   "volumes": []
