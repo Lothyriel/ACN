@@ -47,4 +47,4 @@ class Diversos(commands.Cog):
             await member.move_to(channel=channel)
             await asyncio.sleep(0.25)
 
-        await member.move_to(memberCurrentVoiceChannel)
+        await member.move_to(channel=memberCurrentVoiceChannel)
