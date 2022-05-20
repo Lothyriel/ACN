@@ -65,9 +65,9 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-    - name: Add secrets to Task Definition
+    - name: Download task def
       run: |
-          sed -i "s/<token_bot>/$TOKEN_BOT/g" ${{ env.ECS_TASK_DEFINITION }}
+        aws ecs describe-task-definition --task-definition bot-acn-task-definition --query taskDefinition > ${{ env.ECS_TASK_DEFINITION }}
           
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
