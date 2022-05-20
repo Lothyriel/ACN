@@ -40,7 +40,8 @@ env:
   ECS_TASK_DEFINITION: run-task-definition.json   # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: bot-acn-repo                    # set this to the name of the container in the
                                                   # containerDefinitions section of your task definition
-
+  TOKEN_BOT: ${{secrets.TOKEN_BOT}}               
+  
 permissions:
   contents: read
 
@@ -49,7 +50,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
-
+  
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -64,7 +65,10 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-
+    - name: Add secrets to Task Definition
+      run: |
+          sed -i "s/<token_bot>/$TOKEN_BOT/g" ECS_TASK_DEFINITION
+          
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
