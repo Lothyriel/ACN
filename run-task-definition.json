@@ -11,7 +11,12 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name": "TOKEN_BOT",
+          "value": "<token_bot>"
+        },,
+      ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
