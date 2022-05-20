@@ -37,7 +37,7 @@ env:
   ECR_REPOSITORY: bot-acn-repo                    # set this to your Amazon ECR repository name
   ECS_SERVICE: bot-acn-service                    # set this to your Amazon ECS service name
   ECS_CLUSTER: bot-acn-cluster                    # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: run-task-definition.json   # set this to your Amazon ECS task definition name | to get the json config file with "describe-task-definition"
+  ECS_TASK_DEFINITION: bot-acn-task-definition    # set this to your Amazon ECS task definition name | to get the json config file with "describe-task-definition"
   CONTAINER_NAME: bot-acn-repo                    # set this to the name of the container in the container definitions section of your task definition
   
   # DON'T CHANGE
