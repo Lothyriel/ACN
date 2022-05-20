@@ -27,3 +27,7 @@ class SoundPad(commands.Cog):
     @commands.command(help="é o buff familia")
     async def buff(self, ctx):
         await self.player.play(ctx, 0, 'buff.mp3')
+        
+    @commands.command(help="MAG a melhor de todas")
+    async def bomba(self, ctx):
+        await self.player.play(ctx, 0, 'bomba.mp3')
