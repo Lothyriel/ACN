@@ -1,11 +1,6 @@
-import asyncio
 import os
-import typing
-from json import JSONDecodeError
-from random import randrange
 
 import discord
-import requests
 from discord.ext import commands
 
 class EnviaSojado(commands.Cog):
@@ -14,7 +9,7 @@ class EnviaSojado(commands.Cog):
 
     @commands.command(help="Envia N sojados.")
     @commands.cooldown(1, 60, commands.BucketType.user)
-    async def soja(self, ctx):
+    async def soja(self, ctx) -> None:
 
         path = os.getcwd() + "/images/"        
         for pathSojado in os.listdir(path):

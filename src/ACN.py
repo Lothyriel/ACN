@@ -28,13 +28,14 @@ class ACN(commands.Bot):
         self.random = randint
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
-
         self.player = MusicPlayer(self)
         self.add_cog(self.player)
         self.add_cog(SoundPad(self.player))
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
         self.add_cog(EnviaSojado(self))
+
+        self.debug = False
 
         load_dotenv()
         self.run(os.getenv("TOKEN_BOT"))

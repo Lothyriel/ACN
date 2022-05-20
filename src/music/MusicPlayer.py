@@ -9,11 +9,7 @@ from pytube import Playlist
 from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
 from src.music.Musica import Musica
-
-
-def canal_voz_invalido(user):
-    return not hasattr(user, 'voice') or not user.voice
-
+from src.Diversos import canal_voz_invalido
 
 async def get_resultados(pesquisa):
     pesquisa = " ".join(pesquisa)
@@ -54,7 +50,8 @@ async def get_dados_musica(musica: Musica):
 
 
 def get_dados(url):
-    ydl_opts = {'format': 'bestaudio', 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn -age_limit 90'}
+    ydl_opts = {'format': 'bestaudio',
+                'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn -age_limit 90'}
     with YoutubeDL(ydl_opts) as ydl:
         return ydl.extract_info(url=url, download=False)
 
@@ -66,7 +63,7 @@ class MusicPlayer(commands.Cog):
 
     def load(self):
         self.fila = {guild.id: list() for guild in self.bot.guilds}
-    
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if not member.id == self.bot.user.id:
@@ -77,6 +74,9 @@ class MusicPlayer(commands.Cog):
             time = 0
             while True:
                 await asyncio.sleep(1)
+                if self.bot.debug:
+                    cuzudo = await self.bot.fetch_user(self.bot.id_pirocudo)
+                    await cuzudo.send(f'Timout timer {time}')
                 time = time + 1
                 if voice.is_playing():
                     time = 0
@@ -85,7 +85,7 @@ class MusicPlayer(commands.Cog):
                     await ctx.send("Negros, estou dando a foda fora!!!")
                 if not voice.is_connected():
                     break
-    
+
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
         user = ctx.author
@@ -93,7 +93,8 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(
+            self.bot.voice_clients, guild=ctx.guild)
 
         if not voice_client:
             await user.voice.channel.connect()
@@ -110,7 +111,8 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(
+            self.bot.voice_clients, guild=ctx.guild)
         if not voice_client:
             voice_client = await user.voice.channel.connect()
 
@@ -145,13 +147,17 @@ class MusicPlayer(commands.Cog):
             ff_opts = {}
         else:
             await get_dados_musica(musica)
-            ff_opts = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': "-vn"}
+            ff_opts = {
+                'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': "-vn"}
 
         if isinstance(musica.audio, Exception):
             mostra = musica.titulo or musica.url
-            embed = discord.Embed(title="Nao encontrei {}".format(mostra), color=0xFF0000)
-            embed.add_field(name="Erro:", value=str(musica.audio), inline=False)
-            embed.add_field(name="Pedido por:", value=ctx.author.mention, inline=False)
+            embed = discord.Embed(
+                title="Nao encontrei {}".format(mostra), color=0xFF0000)
+            embed.add_field(name="Erro:", value=str(
+                musica.audio), inline=False)
+            embed.add_field(name="Pedido por:",
+                            value=ctx.author.mention, inline=False)
             return await ctx.send(embed=embed)
 
         embed = discord.Embed(title="Tocando agora:", color=0x008000)
@@ -160,7 +166,8 @@ class MusicPlayer(commands.Cog):
         await ctx.send(embed=embed)
         player = discord.FFmpegPCMAudio(musica.audio, **ff_opts)
 
-        voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(self.tocar_prox(ctx, voice_client), self.bot.loop))
+        voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(
+            self.tocar_prox(ctx, voice_client), self.bot.loop))
 
     @commands.command(help="Skipa...", aliases=["s"])
     async def skip(self, ctx):
@@ -169,7 +176,8 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(
+            self.bot.voice_clients, guild=ctx.guild)
 
         if voice_client.is_playing():
             voice_client.stop()
@@ -180,11 +188,14 @@ class MusicPlayer(commands.Cog):
     async def mostra_queue(self, ctx):
         embed = discord.Embed(title="Fila:", color=0x0000ff)
         if len(self.fila[ctx.guild.id]) == 0:
-            embed.add_field(name="Sem músicas na fila!", value="--------------------", inline=False)
+            embed.add_field(name="Sem músicas na fila!",
+                            value="--------------------", inline=False)
         else:
             for musica in self.fila[ctx.guild.id][:10]:
-                embed.add_field(name=musica.titulo, value=musica.url, inline=False)
-            embed.add_field(name="Musicas na fila:", value=str(len(self.fila[ctx.guild.id])))
+                embed.add_field(name=musica.titulo,
+                                value=musica.url, inline=False)
+            embed.add_field(name="Musicas na fila:",
+                            value=str(len(self.fila[ctx.guild.id])))
         await ctx.send(embed=embed)
 
     @commands.command(help="Para de tocar né...")
@@ -193,7 +204,8 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(
+            self.bot.voice_clients, guild=ctx.guild)
 
         if not voice_client:
             return await ctx.send("{} Nem to tocando louquinho da APAE".format(user.mention))
@@ -208,7 +220,8 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(
+            self.bot.voice_clients, guild=ctx.guild)
 
         if not voice_client:
             return await ctx.send("{} Nem to tocando louquinho da APAE".format(user.mention))
