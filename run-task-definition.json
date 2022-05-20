@@ -15,7 +15,7 @@
         {
           "name": "TOKEN_BOT",
           "value": "<token_bot>"
-        },,
+        },
       ],
       "resourceRequirements": null,
       "ulimits": null,
