@@ -2,7 +2,7 @@ import datetime
 import os
 
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 from datetime import datetime
 
 import discord.ext.commands as exc
@@ -12,11 +12,9 @@ from random import randint
 import time
 
 from src.EnviaSojado import EnviaSojado
-from src import CoinPriceAlert
 from src.Diversos import Diversos
 from src.EnviaHentai import EnviaHentai
 from src.music.MusicPlayer import MusicPlayer
-from src.Navegador import Navegador
 from src.music.SoundPad import SoundPad
 
 
@@ -30,36 +28,22 @@ class ACN(commands.Bot):
         self.random = randint
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
-        # self.Controlador = C.Controlador()
-        # self.CrowTracker = CrowTracker(self)
-        self.Selenium = Navegador(self)
 
         self.player = MusicPlayer(self)
         self.add_cog(self.player)
         self.add_cog(SoundPad(self.player))
-
-        # self.add_cog(CoinPriceNotifier(self))
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
-
         self.add_cog(EnviaSojado(self))
 
-        self.add_cog(self.Selenium)
-        # self.add_cog(self.CrowTracker)
         load_dotenv()
-        self.run("ODc3MzU0NDE3Njg5NjA4MjMy.GvYJ3R.dUh7mwxRQ2AfvzeVAXO0pUGpm7jwW_qfZzEWrc")
+        self.run(os.getenv("TOKEN_BOT"))
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
-        contexto = ctx.guild.name if ctx.guild else "PV"
-        user = str(ctx.author)
-        command = ctx.command.name
-        prefix = "!{}".format(command)
-        args = ctx.message.content.replace(prefix, "")
-        data = datetime.today().time()
         if self.random(1, 101) == 100:
             await ctx.send("{} Comi teu cuzinho".format(ctx.author.mention))
-        # C.save_log("{} {} {} {} {}".format(data, contexto, user, command, args.strip()))
+
         await ctx.message.delete()
 
     @commands.Cog.listener()

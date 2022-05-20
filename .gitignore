@@ -115,3 +115,4 @@ dmypy.json
 
 Logs/*.txt
 .idea
+/.vs
