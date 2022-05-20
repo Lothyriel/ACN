@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 from random import seed
 from random import randint
 import time
-from EnviaSojado import EnviaSojado
 
+from src.EnviaSojado import EnviaSojado
 from src import CoinPriceAlert
 from src.Diversos import Diversos
 from src.EnviaHentai import EnviaHentai
@@ -47,7 +47,7 @@ class ACN(commands.Bot):
         self.add_cog(self.Selenium)
         # self.add_cog(self.CrowTracker)
         load_dotenv()
-        self.run(os.getenv("TOKEN_BOT"))
+        self.run("ODc3MzU0NDE3Njg5NjA4MjMy.GvYJ3R.dUh7mwxRQ2AfvzeVAXO0pUGpm7jwW_qfZzEWrc")
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
@@ -65,7 +65,6 @@ class ACN(commands.Bot):
     @commands.Cog.listener()
     async def on_ready(self):
         print("{0} Estamos dentro".format(self.user))
-        status = self.set_status
         self.player.load()
 
         await self.change_presence(activity=discord.Game(name="Sexo na lan house"))

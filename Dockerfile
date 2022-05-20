@@ -10,6 +10,8 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
+RUN apt-get update
+RUN apt-get install -y ffmpeg
 
 WORKDIR /app
 COPY . /app

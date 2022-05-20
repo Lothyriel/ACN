@@ -16,9 +16,9 @@ class EnviaSojado(commands.Cog):
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def soja(self, ctx):
 
-        path = os.getcwd() + "/images/"
-        for pathSojado in path:
-            with open(pathSojado, 'rb') as f:
+        path = os.getcwd() + "/images/"        
+        for pathSojado in os.listdir(path):
+            with open(path + pathSojado, 'rb') as f:
                 picture = discord.File(f)
                 await ctx.send(file=picture)
         
