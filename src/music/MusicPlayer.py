@@ -67,24 +67,24 @@ class MusicPlayer(commands.Cog):
     def load(self):
         self.fila = {guild.id: list() for guild in self.bot.guilds}
     
-@commands.Cog.listener()
-async def on_voice_state_update(self, member, before, after):
-    if not member.id == self.bot.user.id:
-        return
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        if not member.id == self.bot.user.id:
+            return
 
-    if before.channel is None:
-        voice = after.channel.guild.voice_client
-        time = 0
-        while True:
-            await asyncio.sleep(1)
-            time = time + 1
-            if voice.is_playing():
-                time = 0
-            if time == 600:
-                await voice.disconnect()
-                await ctx.send("Negros, estou dando a foda fora!!!")
-            if not voice.is_connected():
-                break
+        if before.channel is None:
+            voice = after.channel.guild.voice_client
+            time = 0
+            while True:
+                await asyncio.sleep(1)
+                time = time + 1
+                if voice.is_playing():
+                    time = 0
+                if time == 600:
+                    await voice.disconnect()
+                    await ctx.send("Negros, estou dando a foda fora!!!")
+                if not voice.is_connected():
+                    break
     
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
