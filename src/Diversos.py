@@ -9,6 +9,8 @@ from discord.ext import commands
 
 def canal_voz_invalido(user):
     return not hasattr(user, 'voice') or not user.voice
+
+tuco_id = 186973041073455105
 class Diversos(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -31,12 +33,17 @@ class Diversos(commands.Cog):
         if self.bot.eh_plebe(ctx.author):
             return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
 
-        self.debug = xor(self.debug, True)
+        self.bot.debug = xor(self.bot.debug, True)
 
     @commands.command(help="Move pessoa")
     @commands.cooldown(1, 600, commands.BucketType.user)
     async def shake(self, ctx, alvo: discord.User):
         member: discord.Member = discord.utils.get(self.bot.get_all_members(),id=alvo.id)
+
+        if self.eh_tuco(member):
+            await ctx.send(f'O {ctx.author.mention} acabou de levar a invertida do TJSC...')
+            member = ctx.author
+
         if canal_voz_invalido(member):
             return await ctx.send(f'O {alvo.mention} não está conectado...')
 
@@ -48,3 +55,6 @@ class Diversos(commands.Cog):
             await asyncio.sleep(0.25)
 
         await member.move_to(channel=memberCurrentVoiceChannel)
+
+    def eh_tuco(self, member):
+        return member.id == tuco_id
