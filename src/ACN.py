@@ -17,6 +17,7 @@ from src.commands.envia.EnviaHentai import EnviaHentai
 from src.commands.Diversos import Diversos
 from src.commands.music.MusicPlayer import MusicPlayer
 from src.commands.music.SoundPad import SoundPad
+from src.commands.music.Lyrics import Lyrics
 
 
 class ACN(commands.Bot):
@@ -37,6 +38,7 @@ class ACN(commands.Bot):
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
         self.add_cog(EnviaSojado(self))
+        self.add_cog(Lyrics(self))
 
         self.debug = False
 
