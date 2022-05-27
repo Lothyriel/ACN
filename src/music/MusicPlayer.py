@@ -59,7 +59,7 @@ def get_dados(url):
 class MusicPlayer(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.repeat = False
+        self.repeatPlaylist = False
         self.fila = {}
 
     def load(self):
@@ -87,9 +87,9 @@ class MusicPlayer(commands.Cog):
                 if not voice.is_connected():
                     break
     
-    @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["p"])
+    @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["r"])
     async def repeat(self, ctx):
-        self.repeat = xor(self.repeat, True)
+        self.repeatPlaylist = xor(self.repeatPlaylist, True)
     
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
