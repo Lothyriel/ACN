@@ -1,21 +1,22 @@
 import datetime
 import os
+import time
 
 import discord
+import discord.ext.commands as exc
+
 from discord.ext import commands
 from datetime import datetime
 
-import discord.ext.commands as exc
 from dotenv import load_dotenv
 from random import seed
 from random import randint
-import time
 
-from src.EnviaSojado import EnviaSojado
-from src.Diversos import Diversos
-from src.EnviaHentai import EnviaHentai
-from src.music.MusicPlayer import MusicPlayer
-from src.music.SoundPad import SoundPad
+from src.commands.envia.EnviaSojado import EnviaSojado
+from src.commands.envia.EnviaHentai import EnviaHentai
+from src.commands.Diversos import Diversos
+from src.commands.music.MusicPlayer import MusicPlayer
+from src.commands.music.SoundPad import SoundPad
 
 
 class ACN(commands.Bot):
@@ -28,9 +29,11 @@ class ACN(commands.Bot):
         self.random = randint
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
+
         self.player = MusicPlayer(self)
-        self.add_cog(self.player)
         self.add_cog(SoundPad(self.player))
+
+        self.add_cog(self.player)
         self.add_cog(Diversos(self))
         self.add_cog(EnviaHentai(self))
         self.add_cog(EnviaSojado(self))
