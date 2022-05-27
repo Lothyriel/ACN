@@ -91,6 +91,7 @@ class MusicPlayer(commands.Cog):
     @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["r"])
     async def repeat(self, ctx):
         self.repeatPlaylist = xor(self.repeatPlaylist, True)
+        await ctx.send("O modo repeat está {}".format("Ligado" if self.repeatPlaylist else "Desligado"))
     
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
