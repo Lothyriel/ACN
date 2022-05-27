@@ -4,6 +4,7 @@ import typing
 import random
 
 import discord
+from operator import xor
 from discord.ext import commands
 from pytube import Playlist
 from yt_dlp import YoutubeDL
