@@ -12,9 +12,9 @@ from dotenv import load_dotenv
 from random import seed
 from random import randint
 
+from src.commands.Diversos import Diversos
 from src.commands.envia.EnviaSojado import EnviaSojado
 from src.commands.envia.EnviaHentai import EnviaHentai
-from src.commands.Diversos import Diversos
 from src.commands.music.MusicPlayer import MusicPlayer
 from src.commands.music.SoundPad import SoundPad
 from src.commands.music.Lyrics import Lyrics

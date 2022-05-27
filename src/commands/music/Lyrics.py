@@ -19,6 +19,6 @@ class Lyrics(commands.Cog):
         lyrics = response.mus
 
         if not lyrics:
-            return await ctx.send("Não existe!!!")
+            return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
 
         await ctx.send(lyrics[0].text)
