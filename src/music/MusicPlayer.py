@@ -59,6 +59,7 @@ def get_dados(url):
 class MusicPlayer(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.repeat = False
         self.fila = {}
 
     def load(self):
@@ -85,7 +86,11 @@ class MusicPlayer(commands.Cog):
                     await ctx.send("Negros, estou dando a foda fora!!!")
                 if not voice.is_connected():
                     break
-
+    
+    @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["p"])
+    async def repeat(self, ctx):
+        self.repeat = xor(self.repeat, True)
+    
     @commands.command(help="Embaralha a queue", aliases=["shuff", "sh"])
     async def shuffle(self, ctx):
         user = ctx.author
@@ -166,8 +171,10 @@ class MusicPlayer(commands.Cog):
         await ctx.send(embed=embed)
         player = discord.FFmpegPCMAudio(musica.audio, **ff_opts)
 
-        voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(
-            self.tocar_prox(ctx, voice_client), self.bot.loop))
+        voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(self.tocar_prox(ctx, voice_client), self.bot.loop))
+        
+        if self.repeat:
+            self.fila[ctx.guild.id].append(musica)
 
     @commands.command(help="Skipa...", aliases=["s"])
     async def skip(self, ctx):
@@ -176,8 +183,7 @@ class MusicPlayer(commands.Cog):
         if canal_voz_invalido(user):
             return await ctx.send("{} Repete não te escuitei".format(user.mention))
 
-        voice_client = discord.utils.get(
-            self.bot.voice_clients, guild=ctx.guild)
+        voice_client = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
 
         if voice_client.is_playing():
             voice_client.stop()
