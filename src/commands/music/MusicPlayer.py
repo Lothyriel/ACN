@@ -174,7 +174,7 @@ class MusicPlayer(commands.Cog):
 
         voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(self.tocar_prox(ctx, voice_client), self.bot.loop))
         
-        if self.repeat:
+        if self.repeatPlaylist:
             self.fila[ctx.guild.id].append(musica)
 
     @commands.command(help="Skipa...", aliases=["s"])
