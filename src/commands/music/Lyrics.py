@@ -1,7 +1,7 @@
 from discord.ext import commands
+from src.util.IO import send_long_text
 
 import requests
-
 
 class Lyrics(commands.Cog):
     def __init__(self, bot):
@@ -23,9 +23,6 @@ class Lyrics(commands.Cog):
 
         lyrics = response['mus'][0]['text']
 
-        inicio = 0
-        fim = 2000
-        while len(lyrics[inicio:fim]):
-            await ctx.send(lyrics[inicio:fim])
-            inicio = inicio + 2000
-            fim = fim + 2000
+        await ctx.send(f"Lyrics de {data}")
+                       
+        await send_long_text(ctx, lyrics)
