@@ -7,7 +7,7 @@ class Lyrics(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(help="Procura a letra na API do Vagalume")
+    @commands.command(help="Procura a letra na API do Vagalume  <artista-música>")
     async def lyrics(self, ctx, *msg):
         data = ' '.join(msg)
 
@@ -25,10 +25,10 @@ class Lyrics(commands.Cog):
 
         if not lyrics:
             return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
-
-        lyrics = list(lyrics)
-
-        while len(lyrics):
-            slice = ''.join(lyrics[0:500])
-            del lyrics[0:500]
-            await ctx.send(slice)
+        
+        inicio = 0
+        fim = 500
+        while len(lyrics[inicio:fim]):
+            inicio = inicio + 500
+            fim = fim + 500
+            await ctx.send(lyrics[inicio:fim])
