@@ -19,7 +19,7 @@ class Lyrics(commands.Cog):
         response = requests.get(endpoint).json()
 
         if response['type'] == 'notfound':
-            return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
+            return await ctx.send(f"Não existe letras para {data}")
 
         lyrics = response['mus'][0]['text']
 
