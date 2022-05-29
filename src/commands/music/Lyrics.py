@@ -29,6 +29,6 @@ class Lyrics(commands.Cog):
         inicio = 0
         fim = 500
         while len(lyrics[inicio:fim]):
+            await ctx.send(lyrics[inicio:fim])
             inicio = inicio + 500
             fim = fim + 500
-            await ctx.send(lyrics[inicio:fim])
