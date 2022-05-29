@@ -2,23 +2,33 @@ from discord.ext import commands
 
 import requests
 
+
 class Lyrics(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(help="Procura a letra na API do Vagalume")
-    async def on_voice_state_update(self, ctx, *msg):
-        meio = msg.index("-")
+    async def lyrics(self, ctx, *msg):
+        data = ' '.join(msg)
 
-        musica = "+".join(msg[0:meio])
-        artista = "+".join(msg[meio:])
-        endpoint = "http://api.vagalume.com.br/search.php?art={}&mus={}".format(artista, musica)
-        
-        response = requests.get(endpoint).json()
+        meio = data.index("-")
 
-        lyrics = response.mus
+        musica = data[meio+1:].replace(' ', '+')
+
+        artista = data[0:meio].replace(' ', '+')
+
+        endpoint = f"http://api.vagalume.com.br/search.php?art={artista}&mus={musica}"
+
+        response = requests.get(endpoint).json()    
+
+        lyrics = response['mus'][0]['text']
 
         if not lyrics:
-            return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
+            return await ctx.send("NÃ£o existe letras para {}".format(" ".join(msg)))
 
-        await ctx.send(lyrics[0].text)
+        lyrics = list(lyrics)
+
+        while len(lyrics):
+            slice = ''.join(lyrics[0:500])
+            del lyrics[0:500]
+            await ctx.send(slice)
