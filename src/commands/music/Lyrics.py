@@ -10,25 +10,22 @@ class Lyrics(commands.Cog):
     @commands.command(help="Procura a letra na API do Vagalume  <artista-música>")
     async def lyrics(self, ctx, *msg):
         data = ' '.join(msg)
-
         meio = data.index("-")
-
-        musica = data[meio+1:].replace(' ', '+')
-
-        artista = data[0:meio].replace(' ', '+')
+        musica = data[meio + 1 : ].replace(' ', '+')
+        artista = data[0 : meio].replace(' ', '+')
 
         endpoint = f"http://api.vagalume.com.br/search.php?art={artista}&mus={musica}"
 
-        response = requests.get(endpoint).json()    
+        response = requests.get(endpoint).json()
+
+        if response['type'] == 'notfound':
+            return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
 
         lyrics = response['mus'][0]['text']
 
-        if not lyrics:
-            return await ctx.send("Não existe letras para {}".format(" ".join(msg)))
-        
         inicio = 0
-        fim = 500
+        fim = 2000
         while len(lyrics[inicio:fim]):
             await ctx.send(lyrics[inicio:fim])
-            inicio = inicio + 500
-            fim = fim + 500
+            inicio = inicio + 2000
+            fim = fim + 2000
