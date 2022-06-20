@@ -34,6 +34,7 @@ class Diversos(commands.Cog):
             return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
 
         self.bot.debug = xor(self.bot.debug, True)
+        await ctx.send("O modo Debug está {}".format("Ligado" if self.bot.debug else "Desligado"))
 
     @commands.command(help="Move pessoa")
     @commands.cooldown(1, 600, commands.BucketType.user)
