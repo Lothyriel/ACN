@@ -61,6 +61,8 @@ class ACN(commands.Bot):
         mito = await self.fetch_user(self.id_pirocudo)
         await mito.send(welcome)
 
+        self.player.load_guilds_queues()
+
         await self.change_presence(activity=discord.Game(name="Sexo na lan house"))
 
     @commands.Cog.listener()

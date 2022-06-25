@@ -63,7 +63,7 @@ class MusicPlayer(commands.Cog):
         self.repeatPlaylist = False
         self.fila = {}
 
-    def load(self):
+    def load_guilds_queues(self):
         self.fila = {guild.id: list() for guild in self.bot.guilds}
 
     @commands.Cog.listener()
