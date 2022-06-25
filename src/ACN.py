@@ -58,7 +58,7 @@ class ACN(commands.Bot):
 
         print(welcome)
 
-        mito = await self.bot.fetch_user(self.id_pirocudo)
+        mito = await self.fetch_user(self.id_pirocudo)
         await mito.send(welcome)
 
         await self.change_presence(activity=discord.Game(name="Sexo na lan house"))
