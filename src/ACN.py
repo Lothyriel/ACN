@@ -54,8 +54,12 @@ class ACN(commands.Bot):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("{0} Estamos dentro".format(self.user))
-        self.player.load()
+        welcome = f'Estamos dentro! {self.user}'
+
+        print(welcome)
+
+        mito = await self.bot.fetch_user(self.id_pirocudo)
+        await mito.send(welcome)
 
         await self.change_presence(activity=discord.Game(name="Sexo na lan house"))
 
