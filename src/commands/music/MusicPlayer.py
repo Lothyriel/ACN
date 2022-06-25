@@ -79,10 +79,10 @@ class MusicPlayer(commands.Cog):
                 if self.bot.debug:
                     cuzudo = await self.bot.fetch_user(self.bot.id_pirocudo)
                     await cuzudo.send(f'Timout timer {time}')
-                time = time + 1
-                if voice.is_playing():
+                time = time + 1                
+                if len(voice.members) > 1:
                     time = 0
-                if time == 600:
+                if time == 300:
                     await voice.disconnect()
                 if not voice.is_connected():
                     break
