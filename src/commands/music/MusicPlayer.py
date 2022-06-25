@@ -71,21 +71,10 @@ class MusicPlayer(commands.Cog):
         if not member.id == self.bot.user.id:
             return
 
-        if before.channel is None:
-            voice = after.channel.guild.voice_client
-            time = 0
-            while True:
-                await asyncio.sleep(1)
-                if self.bot.debug:
-                    cuzudo = await self.bot.fetch_user(self.bot.id_pirocudo)
-                    await cuzudo.send(f'Timout timer {time}')
-                time = time + 1                
-                if len(after.channel.members) > 1:
-                    time = 0
-                if time == 300:
-                    await voice.disconnect()
-                if not voice.is_connected():
-                    break
+        if before.channel is not None:
+            return
+
+        self.init_timeout_loop(after.channel)
     
     @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["r"])
     async def repeat(self, ctx):
@@ -239,3 +228,20 @@ class MusicPlayer(commands.Cog):
         else:
             voice_client.resume()
             await ctx.send("{} Mim resumiu...".format(user.mention))
+
+
+    async def init_timeout_loop(self, voice_channel):
+        voice_client = voice_channel.guild.voice_client
+        time = 0
+        while True:
+            await asyncio.sleep(1)
+            if self.bot.debug:
+                mito = await self.bot.fetch_user(self.bot.id_pirocudo)
+                await mito.send(f'Timout timer {time}')
+            time = time + 1                
+            if len(voice_channel.members) > 1:
+                time = 0
+            if time == 300:
+                await voice_client.disconnect()
+            if not voice_client.is_connected():
+                break
