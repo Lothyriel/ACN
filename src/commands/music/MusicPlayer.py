@@ -239,7 +239,7 @@ class MusicPlayer(commands.Cog):
                 mito = await self.bot.fetch_user(self.bot.id_pirocudo)
                 await mito.send(f'Timout timer {time}')
             time = time + 1                
-            if len(voice_channel.members) > 1:
+            if len(voice_channel.members) > 1 and voice_client.is_playing():
                 time = 0
             if time == 300:
                 await voice_client.disconnect()
