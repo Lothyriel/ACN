@@ -74,7 +74,7 @@ class MusicPlayer(commands.Cog):
         if before.channel is not None:
             return
 
-        self.init_timeout_loop(after.channel)
+        await self.init_timeout_loop(after.channel)
     
     @commands.command(help="Liga o modo repeat do tocador de musica", aliases=["r"])
     async def repeat(self, ctx):
