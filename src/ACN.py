@@ -52,6 +52,21 @@ class ACN(commands.Bot):
 
         await ctx.message.delete()
 
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        if not self.debug:
+            return
+
+        mito = await self.fetch_user(self.id_pirocudo)
+        
+        if after.channel and not before.channel:
+            await mito.send(f'{member} entrou')
+
+        if not after.channel and before.channel:
+            await mito.send(f'{member} saiu')
+
+            
     @commands.Cog.listener()
     async def on_ready(self):
         welcome = f'Estamos dentro! {self.user}'
