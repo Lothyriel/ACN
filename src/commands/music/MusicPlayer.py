@@ -68,9 +68,9 @@ class MusicPlayer(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if not after and self.bot.debug:
+        if self.bot.debug:
             mito = await self.bot.fetch_user(self.bot.id_pirocudo)
-            await mito.send(f'Usuário {member} saiu')
+            await mito.send(f'Usuário {member} {("entrou" if after else "saiu")}')
 
         if not member.id == self.bot.user.id:
             return
