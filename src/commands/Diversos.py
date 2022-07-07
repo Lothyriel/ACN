@@ -45,7 +45,7 @@ class Diversos(commands.Cog):
             await ctx.send(f'O {ctx.author.mention} acabou de levar a invertida do TJSC...')
             member = ctx.author
 
-        elif discord.utils.get(ctx.guild.roles, name="anti-zuck") in ctx.author.roles:
+        elif discord.utils.get(ctx.guild.roles, name="anti-zuck") in member.roles:
            await ctx.send(f'O {ctx.author.mention} acabou de levar a invertida anti-zuck...')
            member = ctx.author
 
