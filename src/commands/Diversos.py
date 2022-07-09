@@ -61,5 +61,33 @@ class Diversos(commands.Cog):
 
         await member.move_to(channel=memberCurrentVoiceChannel)
 
+
+    @commands.command(help="Move pessoa")
+    @commands.cooldown(1, 600, commands.BucketType.user)
+    async def shake2(self, ctx, alvo: discord.User):
+        member: discord.Member = discord.utils.get(self.bot.get_all_members(), id=alvo.id)
+
+        if self.eh_tuco(member):
+            await ctx.send(f'O {ctx.author.mention} acabou de levar a invertida do TJSC...')
+            member = ctx.author
+
+        elif discord.utils.get(ctx.guild.roles, name="anti-zuck") in member.roles:
+           await ctx.send(f'O {ctx.author.mention} acabou de levar a invertida anti-zuck...')
+           member = ctx.author
+
+        if canal_voz_invalido(member):
+            return await ctx.send(f'O {alvo.mention} não está conectado...')
+
+        member_current_voice_channel = member.voice.channel
+
+        move_channel = filter(lambda x : x.id is not member_current_voice_channel.id , ctx.guild.voice_channels)
+
+        for _ in range(50):
+            await member.move_to(channel=move_channel)
+            await asyncio.sleep(0.10)
+            await member.move_to(channel=member_current_voice_channel)
+            await asyncio.sleep(0.10)
+
+
     def eh_tuco(self, member):
         return member.id == tuco_id
