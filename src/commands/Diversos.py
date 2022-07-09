@@ -80,7 +80,7 @@ class Diversos(commands.Cog):
 
         member_current_voice_channel = member.voice.channel
 
-        move_channel = filter(lambda x : x.id is not member_current_voice_channel.id , ctx.guild.voice_channels)
+        move_channel = filter(lambda x : x.id is not member_current_voice_channel.id , ctx.guild.voice_channels)[0]
 
         for _ in range(50):
             await member.move_to(channel=move_channel)
