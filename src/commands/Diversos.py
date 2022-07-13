@@ -10,10 +10,26 @@ from discord.ext import commands
 def canal_voz_invalido(user):
     return not hasattr(user, 'voice') or not user.voice
 
+async def movecao(member, member_current_voice_channel, move_channel):
+    for _ in range(50):
+        await member.move_to(channel=move_channel)
+        await asyncio.sleep(0.10)
+        await member.move_to(channel=member_current_voice_channel)
+        await asyncio.sleep(0.10)
+
+
 tuco_id = 186973041073455105
 class Diversos(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):        
+        if self.debug:
+            await logacao()
+
+        await movecao_arkhandinica()
+
 
     @commands.command(help="Mandar <msg> para todos os grupos")
     async def att(self, ctx, *msg):
@@ -82,12 +98,24 @@ class Diversos(commands.Cog):
 
         move_channel = list(filter(lambda x : x.id is not member_current_voice_channel.id , ctx.guild.voice_channels))[0]
 
-        for _ in range(50):
-            await member.move_to(channel=move_channel)
-            await asyncio.sleep(0.10)
-            await member.move_to(channel=member_current_voice_channel)
-            await asyncio.sleep(0.10)
+        await movecao(member, member_current_voice_channel, move_channel)
 
+    async def movecao_arkhandinica(self, member, after):
+        if "rkhan" in member.discriminator and member.self_mute and member.activity.Type is discord.Streaming:
+            la_palomba = discord.utils.get(self.bot.guilds, id=244922266050232321)
+
+            canal_movecao = la_palomba.voice_channels[1] if la_palomba.voice_channels[0].id == after.channel.id else la_palomba.voice_channels[0]
+
+            await movecao(member, after.channel, canal_movecao)
+
+    async def logacao(member, after, before):
+        mito = await self.fetch_user(self.id_pirocudo)
+
+        if after.channel and not before.channel:
+            await mito.send(f'{member} entrou')
+
+        if not after.channel and before.channel:
+            await mito.send(f'{member} saiu')
 
     def eh_tuco(self, member):
         return member.id == tuco_id
