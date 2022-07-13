@@ -26,9 +26,9 @@ class Diversos(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):        
         if self.debug:
-            await logacao()
+            await self.logacao(member, after, before)
 
-        await movecao_arkhandinica()
+        await self.movecao_arkhandinica(member, after)
 
 
     @commands.command(help="Mandar <msg> para todos os grupos")
@@ -108,7 +108,7 @@ class Diversos(commands.Cog):
 
             await movecao(member, after.channel, canal_movecao)
 
-    async def logacao(member, after, before):
+    async def logacao(self, member, after, before):
         mito = await self.fetch_user(self.id_pirocudo)
 
         if after.channel and not before.channel:
