@@ -11,7 +11,7 @@ def canal_voz_invalido(user):
     return not hasattr(user, 'voice') or not user.voice
 
 async def movecao(member, member_current_voice_channel, move_channel):
-    for _ in range(50):
+    for _ in range(10):
         await member.move_to(channel=move_channel)
         await asyncio.sleep(0.10)
         await member.move_to(channel=member_current_voice_channel)
