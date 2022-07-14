@@ -25,7 +25,7 @@ class Diversos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):        
-        if self.debug:
+        if self.bot.debug:
             await self.logacao(member, after, before)
 
         await self.movecao_arkhandinica(member, after)
@@ -101,7 +101,7 @@ class Diversos(commands.Cog):
         await movecao(member, member_current_voice_channel, move_channel)
 
     async def movecao_arkhandinica(self, member, after):
-        if "rkhan" in member.discriminator and member.self_mute and member.activity.Type is discord.Streaming:
+        if "rkhan" in member.discriminator and member.voice.self_mute and member.activity.Type is discord.Streaming:
             la_palomba = discord.utils.get(self.bot.guilds, id=244922266050232321)
 
             canal_movecao = la_palomba.voice_channels[1] if la_palomba.voice_channels[0].id == after.channel.id else la_palomba.voice_channels[0]
@@ -109,7 +109,7 @@ class Diversos(commands.Cog):
             await movecao(member, after.channel, canal_movecao)
 
     async def logacao(self, member, after, before):
-        mito = await self.fetch_user(self.id_pirocudo)
+        mito = await self.bot.fetch_user(self.id_pirocudo)
 
         if after.channel and not before.channel:
             await mito.send(f'{member} entrou')
@@ -117,8 +117,8 @@ class Diversos(commands.Cog):
         if not after.channel and before.channel:
             await mito.send(f'{member} saiu')
         
-        await mito.send(f'{member} {"mutado" if member.self_mute else "desmutado"}')
-        await mito.send(f'{member} está {member.activity.Type}')
+        await mito.send(f'{member} {"mutado" if member.voice.self_mute else "desmutado"}')
+        await mito.send(f'{member} está {member.voice.activity.Type}')
 
     def eh_tuco(self, member):
         return member.id == tuco_id
