@@ -117,8 +117,8 @@ class Diversos(commands.Cog):
         if not after.channel and before.channel:
             await mito.send(f'{member} saiu')
         
-        await mito.send(f'{member} {"mutado" if member.voice.self_mute else "desmutado"}')
-        await mito.send(f'{member} está {member.voice.activity.Type}')
+        await mito.send(f'{member} está {"mutado" if member.voice.self_mute else "desmutado"}')
+        await mito.send(f'{member} {"" if member.voice.self_stream else "não"} está streamando')
 
     def eh_tuco(self, member):
         return member.id == tuco_id
