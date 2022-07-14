@@ -101,7 +101,7 @@ class Diversos(commands.Cog):
         await movecao(member, member_current_voice_channel, move_channel)
 
     async def movecao_arkhandinica(self, member, after):
-        if "rkhan" in member.discriminator and member.voice.self_mute and member.activity.Type is discord.Streaming:
+        if "rkhan" in member.discriminator and after.self_mute and after.self_stream:
             la_palomba = discord.utils.get(self.bot.guilds, id=244922266050232321)
 
             canal_movecao = la_palomba.voice_channels[1] if la_palomba.voice_channels[0].id == after.channel.id else la_palomba.voice_channels[0]
@@ -117,8 +117,8 @@ class Diversos(commands.Cog):
         if not after.channel and before.channel:
             await mito.send(f'{member} saiu')
         
-        await mito.send(f'{member} está {"mutado" if member.voice.self_mute else "desmutado"}')
-        await mito.send(f'{member} {"" if member.voice.self_stream else "não"} está streamando')
+        await mito.send(f'{member} está {"mutado" if after.self_mute else "desmutado"}')
+        await mito.send(f'{member} {"" if after.self_stream else "não"} está streamando')
 
     def eh_tuco(self, member):
         return member.id == tuco_id
