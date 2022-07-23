@@ -36,7 +36,7 @@ env:
   AWS_REGION: sa-east-1                           # set this to your AWS region, e.g. us-west-1
   ECR_REPOSITORY: bot-acn-repo                    # set this to your Amazon ECR repository name
   ECS_SERVICE: bot-acn-service                    # set this to your Amazon ECS service name
-  ECS_CLUSTER: maquina-linux-cluster                    # set this to your Amazon ECS cluster name
+  ECS_CLUSTER: lothyriel-cluster                    # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: bot-acn-task-definition    # set this to your Amazon ECS task definition name | to get the json config file with "describe-task-definition"
   CONTAINER_NAME: bot-acn-repo                    # set this to the name of the container in the container definitions section of your task definition
   
