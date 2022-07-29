@@ -30,6 +30,7 @@ class ACN(commands.Bot):
         self.random = randint
         self.iniciei = datetime.now()
         self.id_pirocudo = 244922703667003392
+        self.id_mito = 892942296566358066
 
         self.player = MusicPlayer(self)
         self.add_cog(SoundPad(self.player))
@@ -103,4 +104,4 @@ class ACN(commands.Bot):
         await ctx.send("{} | {}".format(ctx.author.mention, msg))
 
     def eh_plebe(self, user):
-        return user.id != self.id_pirocudo
+        return user.id != self.id_pirocudo or user.id != self.id_mito
