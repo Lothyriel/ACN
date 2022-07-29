@@ -136,6 +136,6 @@ class Diversos(commands.Cog):
             return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
 
         async for message in ctx.channel.history(limit = amount + 1):
-            message.delete()
+            await message.delete()
 
         return await ctx.send(f'foram deletadas {amount} mensagens')
