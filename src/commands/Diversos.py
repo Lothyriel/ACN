@@ -132,10 +132,8 @@ class Diversos(commands.Cog):
 
     @commands.command(help="Limpar chat")
     async def clean(self, ctx, amount):
-        if self.bot.eh_plebe(ctx.author):
-            return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
 
-        async for message in ctx.channel.history(limit = amount + 1):
+        async for message in ctx.channel.history(limit = int(amount) + 1):
             await message.delete()
 
         return await ctx.send(f'foram deletadas {amount} mensagens')
