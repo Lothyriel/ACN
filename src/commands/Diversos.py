@@ -141,7 +141,9 @@ class Diversos(commands.Cog):
         if amount > 100:
             return await ctx.send('menos de 100 mensagens por favor...')
 
-        async for message in ctx.channel.history(limit = amount + 1):
-            await message.delete()
+        # async for message in ctx.channel.history(limit = amount + 1):
+        #     await message.delete()
+
+        await ctx.channel.purge(limit = amount + 1)
 
         return await ctx.send(f'foram deletadas {amount} mensagens')
