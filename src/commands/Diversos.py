@@ -133,8 +133,8 @@ class Diversos(commands.Cog):
     @commands.command(help="Limpar chat")
     async def clean(self, ctx, amount):
 
-        if self.bot.eh_plebe(ctx.author):
-            return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
+        # if self.bot.eh_plebe(ctx.author):
+        #     return await ctx.send("Seu pau é infelizmente muito pequeno para utilizar este comando")
             
         amount = int(amount)
 
