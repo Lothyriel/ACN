@@ -28,10 +28,7 @@ name: Deploy to Amazon ECS
 
 on:
   workflow_dispatch:
-  push:
-   # branches:
-     # - main
-
+  
 env:
   AWS_REGION: sa-east-1                           # set this to your AWS region, e.g. us-west-1
   ECR_REPOSITORY: bot-acn-repo                    # set this to your Amazon ECR repository name
