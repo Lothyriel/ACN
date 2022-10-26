@@ -32,8 +32,8 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           
           # Name of the heroku application to which the build is to be sent.
-          heroku_app_name: app-bot-acn
-
+          heroku_app_name: app-bot-acn  
+          
           # (Optional, default: "./")
           # Dockerfile directory.
           # For example, if you have a Dockerfile in the root of your project, leave it as follows:
@@ -45,7 +45,7 @@ jobs:
 
           # (Optional, default: "")
           # Additional options of docker build command.
-          docker_options: "--no-cache --build-arg TOKEN_BOT=${{ secrets.TOKEN_BOT }}"
+          docker_options: --no-cache --build-arg TOKEN_BOT=${{ secrets.TOKEN_BOT }}
 
           # (Optional, default: "web")
           # Select the process type for which you want the docker container to be uploaded.
