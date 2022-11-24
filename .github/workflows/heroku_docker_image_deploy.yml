@@ -17,6 +17,6 @@ jobs:
           heroku_email: "joao.x27@aluno.ifsc.edu.br"
           usedocker: true
           docker_build_args: |
-            BOT_TOKEN
+            TOKEN_BOT
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_TOKEN: ${{ secrets.TOKEN_BOT }}
