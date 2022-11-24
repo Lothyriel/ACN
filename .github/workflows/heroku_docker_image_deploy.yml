@@ -23,8 +23,6 @@ jobs:
           # Below you must provide variables for your Heroku app.
 
           # The email address associated with your Heroku account.
-          # If you don't want to use repository secrets (which is recommended) you can do:
-          # email: my.email@example.com
           email: joao.x27@aluno.ifsc.edu.br
           
           # Heroku API key associated with provided user's email.
@@ -45,7 +43,7 @@ jobs:
 
           # (Optional, default: "")
           # Additional options of docker build command.
-          docker_options: --no-cache --build-arg TOKEN_BOT=${{ secrets.TOKEN_BOT }}
+          docker_options: "--no-cache --build-arg TOKEN_BOT=${{ secrets.TOKEN_BOT }}"
 
           # (Optional, default: "web")
           # Select the process type for which you want the docker container to be uploaded.
