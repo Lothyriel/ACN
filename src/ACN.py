@@ -44,7 +44,6 @@ class ACN(commands.Bot):
         self.debug = False
 
         load_dotenv()
-        print(f'token {os.getenv("TOKEN_BOT")}')
         self.run(os.getenv("TOKEN_BOT"))
 
     @commands.Cog.listener()
