@@ -104,4 +104,4 @@ class ACN(commands.Bot):
         await ctx.send("{} | {}".format(ctx.author.mention, msg))
 
     def eh_plebe(self, user):
-        return user.id != self.id_pirocudo or user.id != self.id_mito
+        return user.id != self.id_pirocudo and user.id != self.id_mito
