@@ -1,35 +1,22 @@
-name: Push Container to Heroku
+name: Deploy
 
-on: 
+on:
   push:
     branches:
       - main
 
-#set environment variables 
-env:
-  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-  APP_NAME: app-bot-acn
-
 jobs:
-      
-  deploy:
-    name: Deploy to Heroku
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ubuntu-latest
     steps:
-
-    # Clone the repository
-    - name: Checkout
-      uses: actions/checkout@v2
-    
-    - name: Config env var
-      run: heroku config:set TOKEN_BOT=${{ secrets.TOKEN_BOT }} -a $APP_NAME
-    
-    # Build Docker image
-    - name: Docker build
-      run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-
-    # Push the Docker image to Heroku Container Registry
-    - name: Publish
-      run: |
-        heroku container:push worker -a $APP_NAME
-        heroku container:release worker -a $APP_NAME
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "app-bot-acn" #Must be unique in Heroku
+          heroku_email: "joao.x27@aluno.ifsc.edu.br"
+          usedocker: true
+          docker_build_args: |
+            BOT_TOKEN
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
