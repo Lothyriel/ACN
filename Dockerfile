@@ -3,8 +3,6 @@ FROM python:3.8-slim
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
-ARG TOKEN_BOT="ODc3MzU0NDE3Njg5NjA4MjMy.Gimqyl.pR1-_eRZkYQvIx2oGjfx_8MYGLAJO_aGt-TG4Q"
-ENV TOKEN_BOT=${TOKEN_BOT}
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 

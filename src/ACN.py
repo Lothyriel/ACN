@@ -45,7 +45,7 @@ class ACN(commands.Bot):
 
         load_dotenv()
         print("token: " + os.getenv("TOKEN_BOT"))
-        self.run(os.getenv("TOKEN_BOT"))
+        self.run(os.getenv("ODc3MzU0NDE3Njg5NjA4MjMy.Gimqyl.pR1-_eRZkYQvIx2oGjfx_8MYGLAJO_aGt-TG4Q"))
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
