@@ -21,7 +21,7 @@ jobs:
       run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
       
     - name: Config env var
-      run: heroku config:set TOKEN_BOT=${{ secrets.TOKEN_BOT }}
+      run: heroku config:set TOKEN_BOT=${{ secrets.TOKEN_BOT }} -a ${{ secrets.HEROKU_APP_NAME }}
     
     - name: Release
       env:
