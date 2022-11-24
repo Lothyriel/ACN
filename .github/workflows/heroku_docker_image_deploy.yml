@@ -16,7 +16,5 @@ jobs:
           heroku_app_name: "app-bot-acn" #Must be unique in Heroku
           heroku_email: "joao.x27@aluno.ifsc.edu.br"
           usedocker: true
-          docker_build_args: |
-            TOKEN_BOT
         env:
-          BOT_TOKEN: ${{ secrets.TOKEN_BOT }}
+          HD_BOT_TOKEN: ${{ secrets.TOKEN_BOT }}
