@@ -5,25 +5,31 @@ on:
     branches:
       - main
 
+#set environment variables 
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  APP_NAME: app-bot-acn
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+      
+  deploy:
+    name: Deploy to Heroku
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
-    - name: Login to Heroku Container registry
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login 
-      
-    - name: Config env var
-      run: heroku config:set TOKEN_BOT=${{ secrets.TOKEN_BOT }} -a ${{ secrets.HEROKU_APP_NAME }}
-      
-    - name: Build and push
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
+
+    # Clone the repository
+    - name: Checkout
+      uses: actions/checkout@v2
     
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
+    - name: Config env var
+      run: heroku config:set TOKEN_BOT=${{ secrets.TOKEN_BOT }} -a $APP_NAME
+    
+    # Build Docker image
+    - name: Docker build
+      run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+
+    # Push the Docker image to Heroku Container Registry
+    - name: Publish
+      run: |
+        heroku container:push web -a $APP_NAME
+        heroku container:release web -a $APP_NAME
