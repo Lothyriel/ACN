@@ -13,8 +13,11 @@ Parei com esse projeto:
 
 -----------------------------------------------------------------------
 Repo Secrets:
+
 TOKEN_BOT = discord bot token
 
 Optional (ECS Deploy):
+
 AWS_ACCESS_KEY_ID = AWS IAM ID
+
 AWS_SECRET_ACCESS_KEY = AWS IAM Key
